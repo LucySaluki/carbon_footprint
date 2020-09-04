@@ -33,10 +33,34 @@ export default {
             users: null, //this will be the users array returned from the database
             selectedUser: null, //this will be the user selected or created in Login.vue and eventBussed back
             questions: null, //this will be the questions array returned from the database
-            countries: null,
         };
     },
     mounted() {
+
+      // uses OECD data
+      // only 25 results
+        const url =
+            "https://stats.oecd.org/SDMX-JSON/data/AIR_GHG/AUS+AUT+BEL+CAN+CHL+COL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LVA+LTU+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+EU28+OECDE+OECD+NMEC+ARG+BRA+CHN+CRI+IND+IDN+RUS+ZAF.GHG+CO2.GHG_CAP/all?startTime=2017&endTime=2017&dimensionAtObservation=allDimensions&pid=54d564ae-d39d-4fd5-b448-c5e0d3cbdd56";
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                // console.log(data);
+                const countries =
+                    data.structure.dimensions.observation[0].values;
+                const allData = [];
+                for (let i = 0; i < countries.length; i++) {
+                    const dataPoint = {};
+                    dataPoint.id = countries[i].id;
+                    dataPoint.name = countries[i].name;
+                    dataPoint.avg =
+                        data.dataSets[0].observations[`${i}:0:0:0`][0];
+                    allData.push(dataPoint);
+                }
+                console.log("OECD DATA", allData);
+            });
+
+        // uses EIA data (needs EIA_API_KEY in @/secrets.js)
+        // lots of results, lots of undefined though
         fetch(
             `http://api.eia.gov/category/?category_id=2622652&api_key=${EIA_API_KEY}`
         )
@@ -62,36 +86,41 @@ export default {
                                 }
                             );
                             Promise.all(allPops).then((popData) => {
-                                const latest = data.map((el) => {
+                                let latest = data.map((el) => {
                                     const country = el.series[0].name.split(
                                         ", "
                                     )[1];
                                     const Mtonnes = el.series[0].data[0][1];
-                                    const pop = popData.find(popEl => {
-                                      if (popEl.series[0].geography === el.request.series_id.split("-")[2]) {
-                                        return popEl;
-                                      }
-                                    })
-                                    // console.log(pop);
+                                    const pop = popData.find((popEl) => {
+                                        if (
+                                            popEl.series[0].geography ===
+                                            el.request.series_id.split("-")[2]
+                                        ) {
+                                            return popEl;
+                                        }
+                                    });
                                     let population;
                                     let average;
                                     if (pop) {
-                                      const raw = pop.series[0].data[0][1];
-                                      if (raw) {
-                                        population =  raw * 1000;
-                                        average = (Mtonnes*1000000) / population
-                                      }
+                                        const raw = pop.series[0].data[0][1];
+                                        if (raw) {
+                                            population = raw * 1000;
+                                            average =
+                                                (Mtonnes * 1000000) /
+                                                population;
+                                        }
+                                    } else {
+                                      return false;
                                     }
                                     return {
                                         country: country,
-                                        emissions: Mtonnes*1000000,
+                                        emissions: Mtonnes * 1000000,
                                         population: population,
-                                        avg: average
+                                        avg: average,
                                     };
                                 });
-                                console.log(latest);
-                                //this.countries = data;
-                                console.log(popData);
+                                latest = latest.filter(country => country !== false && !isNaN(country.population) && !isNaN(country.avg))
+                                console.log("EIA DATA", latest);
                             });
                         });
                 });
@@ -102,5 +131,3 @@ export default {
 
 <style>
 </style>
-
-http://climatedataapi.worldbank.org/climateweb/rest/v1/country/mavg/tas/2000/2020/GBR
