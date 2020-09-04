@@ -27,6 +27,58 @@ db.users.insertMany([
         score: null,
         country: "Scotland",
         answers: {}
+    },
+    {
+        name: "Ally",
+        score: 9597,
+        country: "Scotland",
+        answers: {
+            sizeOfHousehold: 3,
+            sizeOfHouse: "Medium",
+            fuelUsage: {
+                "Oil": false,
+                "Wood": true,
+                "Coal": false,
+                "Bottled gas": false
+            },
+            recycling: {
+                "Paper/glass/metal": true,
+                "Plastic": true
+            },
+            carsInHousehold: 2,
+            travelByBus: 34,
+            travelByTrain: 200,
+            travelByPlane: 10,
+            weeklyDiet: "Meat/dairy some days",
+            foodMiles: "Some local but supermarket when out of season"
+        }
+
+    },
+    {
+        name: "Jarrod",
+        score: 5508,
+        country: "Scotland",
+        answers: {
+            sizeOfHousehold: 1,
+            sizeOfHouse: "Small",
+            fuelUsage: {
+                "Oil": false,
+                "Wood": false,
+                "Coal": false,
+                "Bottled gas": false
+            },
+            recycling: {
+                "Paper/glass/metal": true,
+                "Plastic": true
+            },
+            carsInHousehold: 0,
+            travelByBus: 60,
+            travelByTrain: 15,
+            travelByPlane: 4,
+            weeklyDiet: "Vegetarian",
+            foodMiles: "Some local but supermarket when out of season"
+        }
+
     }
 ]);
 
