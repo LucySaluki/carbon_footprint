@@ -84,10 +84,13 @@ db.users.insertMany([
 
 db.questions.insertMany([
     {
-        key: "sizeOfHousehold",
-        title: "How many people in your household?",
-        type: "number",
-        answers: []
+        key: "numPeopleInHouse",
+        title: "How many people live in your house?",
+        type: "number", 
+        basekg: 0,
+        answers: [
+            {value: "People", kg: 0},
+        ]
     },
     {
         key: "sizeOfHouse",
