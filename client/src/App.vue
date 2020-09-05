@@ -1,6 +1,6 @@
 <template>
     <main>
-        <p>App</p>
+
         <!--just something to show it's rendering-->
         <HeaderPage/>
         <!-- Render the login component if NO user is selected (selectedUser === null) -->
