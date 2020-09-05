@@ -2,7 +2,7 @@
     <main>
         <p>App</p>
         <!--just something to show it's rendering-->
-
+        <HeaderPage/>
         <!-- Render the login component if NO user is selected (selectedUser === null) -->
         <LoginPage v-if="!selectedUser" :users="users" />
 
@@ -18,6 +18,7 @@
 import LoginPage from "@/components/Login.vue";
 import QuestionsPage from "@/components/Questions.vue";
 import ResultsPage from "@/components/Results.vue";
+import HeaderPage from "@/components/Header.vue"
 import QuestionService from './services/QuestionService';
 import UserService from './services/UserService';
 
@@ -29,6 +30,7 @@ export default {
         ResultsPage,
         QuestionsPage,
         LoginPage,
+        HeaderPage
     },
     data() {
         return {
@@ -58,4 +60,7 @@ export default {
 </script>
 
 <style>
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 </style>
