@@ -1,39 +1,17 @@
 <template>
 <main>
-<section>
-    <header><h1>Number of people in your house?</h1></header>
-    <article>
-        <div>
-            <label for="numPeopleAnswer">Number:</label>
-            <input type="number" id="numPeopleAnswer" v-model="numPeopleInHouse" />
-        </div>
-    </article>
-</section>
-<section >
-    <header><h1>{{ questions[0].title }}</h1></header>
-    <article>
-        <div>
-            <input type="radio" name="numPeopleAnswer" :id="questions[0].answers[0].value" :value="questions[0].answers[0].value" v-model="sizeOfHouse" />
-            <label :for="questions[0].answers[0].value">{{questions[0].answers[0].value}}</label>
-        </div>
-        <div>
-            <input type="radio" name="numPeopleAnswer" :id="questions[0].answers[1].value" :value="questions[0].answers[1].value" v-model="sizeOfHouse" />
-            <label :for="questions[0].answers[1].value">{{questions[0].answers[1].value}}</label>
-        </div>
-        <div>
-            <input type="radio" name="numPeopleAnswer" :id="questions[0].answers[2].value" :value="questions[0].answers[2].value" v-model="sizeOfHouse" />
-            <label :for="questions[0].answers[2].value">{{questions[0].answers[2].value}}</label>
-        </div>
-    </article>
-</section>
-<QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
-<input type="button" value="save answers" v-on:click="saveAnswers" />
+<form v-on:submit.prevent="saveAnswers">
+    <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
+    <input type="submit" value="Save Answers" />
+</form>
+
 </main>
 
 </template>
 
 <script>
-import {QuestionItem} from "@/components/QuestionItem.vue";
+import {eventBus} from "@/main.js";
+import QuestionItem from "@/components/QuestionItem.vue";
 export default {
     name: "questions-page",
     components: { QuestionItem },
@@ -41,8 +19,19 @@ export default {
     data() {
         return {
             numPeopleInHouse: 0,
-            sizeOfHouse: "Small"
+            // sizeOfHouse: "Small"
+            answers: {}
         }
+    },
+    methods: {
+        saveAnswers: function () {
+            eventBus.$emit("save-answers", this.answers);
+        }
+    },
+    mounted() {
+        eventBus.$on("question-item-input", (payload) => {
+            this.answers[payload.question] = payload.answer;
+        })
     }
 
 }

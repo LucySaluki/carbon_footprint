@@ -7,7 +7,7 @@
         <LoginPage v-if="!selectedUser" :users="users" />
 
         <!-- ELSE render the questions component UNLESS selected user has no answers (selectedUser.answers === {}) -->
-        <QuestionsPage v-else-if="!Object.keys(selectedUser.answers).length" :questions="questions" />
+        <QuestionsPage v-else-if="!Object.keys(selectedUser.answers).length" :questions="questions" :selectedUser="selectedUser" />
 
         <!-- ELSE render the results component -->
         <ResultsPage v-else />
