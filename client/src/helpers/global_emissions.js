@@ -2,7 +2,7 @@ import { EIA_API_KEY } from "../secrets.js";
 export const eiaDataApi = function () {
     // uses EIA data (needs EIA_API_KEY in @/secrets.js)
     // lots of results, lots of undefined though
-    fetch(
+    return fetch(
         `http://api.eia.gov/category/?category_id=2622652&api_key=${EIA_API_KEY}`
     )
         .then((res) => res.json())
@@ -12,9 +12,9 @@ export const eiaDataApi = function () {
                     `http://api.eia.gov/series/?api_key=${EIA_API_KEY}&series_id=${el.series_id}`
                 ).then((res) => res.json());
             });
-            Promise.all(allCountries).then((data) => {
+            return Promise.all(allCountries).then((data) => {
                 // get world pop data
-                fetch(
+                return fetch(
                     `http://api.eia.gov/category/?api_key=${EIA_API_KEY}&category_id=2632716`
                 )
                     .then((res) => res.json())
@@ -26,7 +26,7 @@ export const eiaDataApi = function () {
                                 ).then((res) => res.json());
                             }
                         );
-                        Promise.all(allPops).then((popData) => {
+                        return Promise.all(allPops).then((popData) => {
                             let latest = data.map((el) => {
                                 const country = el.series[0].name.split(
                                     ", "

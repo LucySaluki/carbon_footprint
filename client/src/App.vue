@@ -37,7 +37,7 @@ export default {
         };
     },
     mounted() {
-       this.globalEmissions = eiaDataApi();
+        eiaDataApi().then(res => this.globalEmissions = res);
     },
 };
 </script>
