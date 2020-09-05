@@ -18,6 +18,8 @@
 import LoginPage from "@/components/Login.vue";
 import QuestionsPage from "@/components/Questions.vue";
 import ResultsPage from "@/components/Results.vue";
+import QuestionService from './services/QuestionService';
+import UserService from './services/UserService';
 
 import { eiaDataApi } from "@/helpers/global_emissions.js";
 
@@ -37,8 +39,21 @@ export default {
         };
     },
     mounted() {
+        this.fetchQuestions();
+        this.fetchUsers();
+
         eiaDataApi().then(res => this.globalEmissions = res);
     },
+    methods: {
+        fetchQuestions() {
+            QuestionService.getQuestions()
+            .then(questions => this.questions = questions);
+        },
+        fetchUsers() {
+            UserService.getUsers()
+            .then(users => this.users = users);
+        }
+    }
 };
 </script>
 
