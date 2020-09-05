@@ -33,10 +33,11 @@ export default {
             users: null, //this will be the users array returned from the database
             selectedUser: null, //this will be the user selected or created in Login.vue and eventBussed back
             questions: null, //this will be the questions array returned from the database
+            globalEmissions: null
         };
     },
     mounted() {
-       eiaDataApi();
+       this.globalEmissions = eiaDataApi();
     },
 };
 </script>

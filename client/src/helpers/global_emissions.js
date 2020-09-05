@@ -61,7 +61,7 @@ export const eiaDataApi = function () {
                                 };
                             });
                             latest = latest.filter(country => country !== false && !isNaN(country.population) && !isNaN(country.avg))
-                            console.log("EIA DATA", latest);
+                            // console.log("EIA DATA", latest);
                             return latest;
                         });
                     });
