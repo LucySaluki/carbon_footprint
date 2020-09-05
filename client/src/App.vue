@@ -133,8 +133,6 @@ export default {
       UserService.getUsers().then((users) => {
         this.users = users;
 
-        // dev push selectedUser
-        this.selectedUser = users[1];
       });
     },
   },
