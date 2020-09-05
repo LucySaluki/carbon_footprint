@@ -148,5 +148,6 @@ export default {
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  color: #098639;
 }
 </style>

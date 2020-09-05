@@ -41,6 +41,6 @@ export default {
 
 <style>
 section {
-    background-color: lightblue;
+    background-color: #E0F8CD;
 }
 </style>
