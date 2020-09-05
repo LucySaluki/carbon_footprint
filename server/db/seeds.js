@@ -87,7 +87,7 @@ db.questions.insertMany([
         key: "sizeOfHousehold",
         title: "How many people in your household?",
         type: "number",
-        answers: []
+        answer: 0
     },
     {
         key: "sizeOfHouse",
