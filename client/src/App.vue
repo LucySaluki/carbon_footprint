@@ -53,7 +53,12 @@ export default {
         },
         fetchUsers() {
             UserService.getUsers()
-            .then(users => this.users = users);
+            .then(users => {
+                this.users = users;
+
+                // dev push selectedUser
+                this.selectedUser = users[1];
+            });
         }
     }
 };
