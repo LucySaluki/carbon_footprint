@@ -1,5 +1,5 @@
 <template>
-<div><select id="select-user" v-on:change="handleDropdown" v-model="selected">
+<div><select id="select-user" v-model="selected">
   <option value=null disabled >Please choose an option</option>
   <option value="new_user">NEW USER</option>
   <option value=null disabled >----</option>
@@ -17,13 +17,14 @@
     <p>{{ selected.name }}</p>
     <p>{{ selected.country}}</p>
   </div>
-  <input v-if="selected" type="button" :value="selected==='new_user'? 'Create New User':'Load my details'">
+  <input v-if="selected" type="button" :value="selected==='new_user'? 'Create New User':'Load my details'" v-on:click="handleClick">
 </div>
 
 </template>
 
 <script>
 import { eventBus } from  "../main.js";
+import UserService from "@/services/UserService.js";
 
 export default {
   name: "login-page",
@@ -37,7 +38,19 @@ export default {
   },
 
 methods: {
-  handleDropdown: function() {
+  handleClick: function() {
+    if (this.selected === "new_user") {
+      const newUser = {
+        name: this.name,
+        country: this.country,
+        score: null,
+        answers: {}
+      }
+      UserService.postUser(newUser);
+      this.selected = newUser;
+    }
+    eventBus.$emit("user-selected", this.selected);
+    this.selected = null;
 
   }
 

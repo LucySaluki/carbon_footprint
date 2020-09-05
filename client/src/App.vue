@@ -51,6 +51,11 @@ export default {
 
     eiaDataApi().then((res) => (this.globalEmissions = res));
 
+    eventBus.$on("user-selected", (payload) => {
+      this.selectedUser = payload;
+      this.users.push(payload);
+    });
+
     eventBus.$on("save-answers", (payload) => {
         this.selectedUser.answers = payload;
 
