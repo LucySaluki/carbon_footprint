@@ -28,7 +28,10 @@
       <p>Name: {{ selected.name }}</p>
       <p>Country: {{ selected.country}}</p>
     </div>
-    <input v-if="selected" type="submit" :value="selected === 'new_user' ? 'Create New User' : 'Load my details'">
+    <footer>
+      <input v-if="selected" type="submit" :value="selected === 'new_user' ? 'Create New User' : 'Load my details'">
+      <input v-if="selected && selected !== 'new_user'" type="button" value="Delete User" v-on:click="deleteUser" class="delete" />
+    </footer>
   </form>
 </div>
 
@@ -62,7 +65,13 @@ export default {
         eventBus.$emit("user-selected", this.selected);
       }
       this.selected = null;
-
+    },
+    deleteUser: function () {
+      UserService.deleteUser(this.selected._id)
+      .then(() => {
+        eventBus.$emit("delete-user", this.selected);
+        this.selected = null;
+      })
     }
   }
 }
@@ -90,6 +99,14 @@ export default {
   flex-flow: row nowrap;
   justify-content: space-evenly;
 }
+#login-form>form>footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+#login-form > form > footer > input {
+  flex: 50%;
+}
 p {
   margin: 0px;
 }
@@ -97,4 +114,16 @@ p {
   color: red;
   font-weight: 900;
 }
+.delete {
+  background-color: red;
+  color: white;
+  border: none;
+}
+.delete:hover {
+  background-color: rgb(184, 0, 0);
+}
+input[type=submit], input[type=button] {
+  cursor: pointer;
+}
+
 </style>
