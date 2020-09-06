@@ -3,7 +3,7 @@
     <!--just something to show it's rendering-->
     <HeaderPage />
     <!-- Render the login component if NO user is selected (selectedUser === null) -->
-    <LoginPage v-if="!selectedUser" :users="users" />
+    <LoginPage v-if="!selectedUser" :users="users" :countries="countries" />
 
     <!-- ELSE render the questions component UNLESS selected user has no answers (selectedUser.answers === {}) -->
     <QuestionsPage
@@ -43,13 +43,19 @@ export default {
       selectedUser: null, //this will be the user selected or created in Login.vue and eventBussed back
       questions: null, //this will be the questions array returned from the database
       globalEmissions: null,
+      countries: null
     };
   },
   mounted() {
     this.fetchQuestions();
     this.fetchUsers();
 
-    eiaDataApi().then((res) => (this.globalEmissions = res));
+    fetch("https://restcountries.eu/rest/v2/all")
+    .then(res => res.json())
+    .then(data => {
+      this.countries = data;
+      eiaDataApi(data).then((res) => (this.globalEmissions = res));
+    });
 
     eventBus.$on("user-selected", (payload) => {
       this.selectedUser = payload;
