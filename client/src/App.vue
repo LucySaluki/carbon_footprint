@@ -69,6 +69,11 @@ export default {
 
     eventBus.$on("go-home", () => {
       this.selectedUser = null;
+    });
+
+    eventBus.$on("delete-user", (deletedUser) => {
+      const index = this.users.findIndex(user => user === deletedUser);
+      this.users.splice(index, 1);
     })
 
     eventBus.$on("save-answers", (payload) => {
