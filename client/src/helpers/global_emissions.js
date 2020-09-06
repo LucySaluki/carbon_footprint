@@ -1,70 +1,45 @@
 import { EIA_API_KEY } from "../secrets.js";
-export const eiaDataApi = function () {
+export const eiaDataApi = function (restCountries) {
     // uses EIA data (needs EIA_API_KEY in @/secrets.js)
     // lots of results, lots of undefined though
+    // initial endpoint
     return fetch(
         `http://api.eia.gov/category/?category_id=2622652&api_key=${EIA_API_KEY}`
     )
         .then((res) => res.json())
         .then((data) => {
             const allCountries = data.category.childseries.map((el) => {
+                // endpoint for each country's emissions
                 return fetch(
                     `http://api.eia.gov/series/?api_key=${EIA_API_KEY}&series_id=${el.series_id}`
                 ).then((res) => res.json());
             });
+            // return array of each country's historical emissions data
             return Promise.all(allCountries).then((data) => {
-                // get world pop data
-                return fetch(
-                    `http://api.eia.gov/category/?api_key=${EIA_API_KEY}&category_id=2632716`
-                )
-                    .then((res) => res.json())
-                    .then((popData) => {
-                        const allPops = popData.category.childseries.map(
-                            (el) => {
-                                return fetch(
-                                    `http://api.eia.gov/series/?api_key=${EIA_API_KEY}&series_id=${el.series_id}`
-                                ).then((res) => res.json());
-                            }
-                        );
-                        return Promise.all(allPops).then((popData) => {
-                            let latest = data.map((el) => {
-                                const country = el.series[0].name.split(
-                                    ", "
-                                )[1];
-                                const Mtonnes = el.series[0].data[0][1];
-                                const pop = popData.find((popEl) => {
-                                    if (
-                                        popEl.series[0].geography ===
-                                        el.request.series_id.split("-")[2]
-                                    ) {
-                                        return popEl;
-                                    }
-                                });
-                                let population;
-                                let average;
-                                if (pop) {
-                                    const raw = pop.series[0].data[0][1];
-                                    if (raw) {
-                                        population = raw * 1000;
-                                        average =
-                                            (Mtonnes * 1000000) /
-                                            population;
-                                    }
-                                } else {
-                                    return false;
-                                }
-                                return {
-                                    country: country,
-                                    emissions: Mtonnes * 1000000,
-                                    population: population,
-                                    avg: average,
-                                };
-                            });
-                            latest = latest.filter(country => country !== false && !isNaN(country.population) && !isNaN(country.avg))
-                            // console.log("EIA DATA", latest);
-                            return latest;
-                        });
-                    });
+                // loop through the emssions data and map it to the restCountries
+                let latest = data.map(el => {
+                    // extract the 3 letter id for the emissions data
+                    const emissions3Code = el.request.series_id.split("-")[2];
+                    // extract the emissions in kg
+                    const kg = Number((el.series[0].data[0][1] * 1000000).toFixed(5));
+                    // find a match in the restCountries data
+                    const foundCountry = restCountries.find(country => {
+                        return country.alpha3Code === emissions3Code;
+                    })
+                    if (foundCountry) {
+                        // create an object with the data we need for each country
+                        return {
+                            country: foundCountry.name,
+                            countryCode: emissions3Code,
+                            border: foundCountry.borders,
+                            emissions: kg,
+                            population: foundCountry.population,
+                            avg: Number((kg / foundCountry.population).toFixed(3)),
+                        }
+                    }
+                });
+                // filter out null/no data countries and sort alphabetically
+                return latest.filter(el => el && el.emissions > 0).sort((a, b) => (a.country >= b.country) ? 1 : -1);
             });
         });
 }
