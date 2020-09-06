@@ -7,76 +7,60 @@ db.users.insertMany([
     {
         name: "Jonny",
         score: null,
-        country: "Scotland",
+        country: "United Kingdom",
         answers: {}
     },
     {
         name: "Duncan",
         score: null,
-        country: "England",
+        country: "United Kingdom",
         answers: {}
     },
     {
         name: "Lucy",
         score: null,
-        country: "Scotland",
+        country: "United Kingdom",
         answers: {}
     },
     {
         name: "Vishal",
         score: null,
-        country: "Scotland",
+        country: "United Kingdom",
         answers: {}
     },
     {
         name: "Ally",
-        score: 9597,
+        score: 13.871,
         country: "Scotland",
         answers: {
-            sizeOfHousehold: 3,
-            sizeOfHouse: "Medium",
-            fuelUsage: {
-                "Oil": false,
-                "Wood": true,
-                "Coal": false,
-                "Bottled gas": false
-            },
-            recycling: {
-                "Paper/glass/metal": true,
-                "Plastic": true
-            },
             carsInHousehold: 2,
-            travelByBus: 34,
-            travelByTrain: 200,
-            travelByPlane: 10,
-            weeklyDiet: "Meat/dairy some days",
-            foodMiles: "Some local but supermarket when out of season"
+            foodMiles: "Mainly/all supermarket, fresh food",
+            fuelUsage: ["Oil"],
+            numPeopleInHouse: 3,
+            recycling: ["Paper/glass/metal", "Plastic"],
+            sizeOfHouse: "Large",
+            travelByBus: 20,
+            travelByPlane: 20,
+            travelByTrain: 58,
+            weeklyDiet: "Meat/dairy some days"
         }
 
     },
     {
         name: "Jarrod",
-        score: 5508,
+        score: 7.791,
         country: "Scotland",
         answers: {
-            sizeOfHousehold: 1,
-            sizeOfHouse: "Small",
-            fuelUsage: {
-                "Oil": false,
-                "Wood": false,
-                "Coal": false,
-                "Bottled gas": false
-            },
-            recycling: {
-                "Paper/glass/metal": true,
-                "Plastic": true
-            },
             carsInHousehold: 0,
-            travelByBus: 60,
-            travelByTrain: 15,
-            travelByPlane: 4,
-            weeklyDiet: "Vegetarian",
-            foodMiles: "Some local but supermarket when out of season"
+            foodMiles: "Mostly own garden/locally",
+            fuelUsage: ["Wood"],
+            numPeopleInHouse: 2,
+            recycling: ["Paper/glass/metal", "Plastic"],
+            sizeOfHouse: "Small",
+            travelByBus: 5,
+            travelByPlane: 5,
+            travelByTrain: 5,
+            weeklyDiet: "Meat/dairy most days"
         }
 
     }
@@ -86,21 +70,21 @@ db.questions.insertMany([
     {
         key: "numPeopleInHouse",
         title: "How many people live in your house?",
-        type: "number", 
+        type: "number",
         basekg: 0,
         answers: [
-            {value: "People", kg: 0},
+            { value: "people", kg: 0 },
         ]
     },
     {
         key: "sizeOfHouse",
         title: "What size is your house?",
-        type: "radio", 
+        type: "radio",
         basekg: 0,
         answers: [
-            {value: "Small", kg: 930},
-            {value: "Medium", kg: 1480},
-            {value: "Large", kg: 2160},
+            { value: "Small", kg: 930 },
+            { value: "Medium", kg: 1480 },
+            { value: "Large", kg: 2160 },
         ]
     },
     {
@@ -109,10 +93,10 @@ db.questions.insertMany([
         type: "checkbox",
         basekg: 0,
         answers: [
-            {value: "Oil", kg: 5900},
-            {value: "Wood", kg: 4000}, //placeholders
-            {value: "Coal", kg: 2000}, //placeholdes
-            {value: "Bottled gas", kg: 9200},
+            { value: "Oil", kg: 5900 },
+            { value: "Wood", kg: 4000 }, //placeholders
+            { value: "Coal", kg: 2000 }, //placeholders
+            { value: "Bottled gas", kg: 9200 },
         ]
     },
     {
@@ -121,8 +105,8 @@ db.questions.insertMany([
         type: "checkbox",
         basekg: 3400,
         answers: [
-            {value: "Paper/glass/metal", kg: -70},
-            {value: "Plastic", kg: -140},
+            { value: "Paper/glass/metal", kg: -70 },
+            { value: "Plastic", kg: -140 },
         ]
     },
     {
@@ -131,11 +115,11 @@ db.questions.insertMany([
         type: "radio",
         basekg: 0,
         answers: [
-            {value: 0, kg: 0},
-            {value: 1, kg: 2800},
-            {value: 2, kg: 5600},
-            {value: 3, kg: 8400},
-            {value: 4, kg: 11200},
+            { value: 0, kg: 0 },
+            { value: 1, kg: 2800 },
+            { value: 2, kg: 5600 },
+            { value: 3, kg: 8400 },
+            { value: 4, kg: 11200 },
         ]
     },
     {
@@ -144,7 +128,7 @@ db.questions.insertMany([
         type: "number",
         basekg: 0,
         answers: [
-            {value: "per mile", kg: 0.1},
+            { value: "miles", kg: 0.1 },
         ]
     },
     {
@@ -153,7 +137,7 @@ db.questions.insertMany([
         type: "number",
         basekg: 0,
         answers: [
-            {value: "per mile", kg: 0.1},
+            { value: "miles", kg: 0.1 },
         ]
     },
     {
@@ -162,7 +146,7 @@ db.questions.insertMany([
         type: "number",
         basekg: 0,
         answers: [
-            {value: "per hour", kg: 250},
+            { value: "hours", kg: 250 },
         ]
     },
     {
@@ -171,10 +155,10 @@ db.questions.insertMany([
         type: "radio",
         basekg: 0,
         answers: [
-            {value: "Meat/dairy most days", kg: 690},
-            {value: "Meat/dairy some days", kg: 490},
-            {value: "Vegetarian", kg: 190},
-            {value: "Vegan", kg: 90},
+            { value: "Meat/dairy most days", kg: 690 },
+            { value: "Meat/dairy some days", kg: 490 },
+            { value: "Vegetarian", kg: 190 },
+            { value: "Vegan", kg: 90 },
         ]
     },
     {
@@ -183,10 +167,10 @@ db.questions.insertMany([
         type: "radio",
         basekg: 0,
         answers: [
-            {value: "Mostly own garden/locally", kg: 90},
-            {value: "Some local but supermarket when out of season", kg: 190},
-            {value: "Mainly/all supermarket, fresh food", kg: 490},
-            {value: "Mainly/all supermarket, processed food", kg: 690},
+            { value: "Mostly own garden/locally", kg: 90 },
+            { value: "Some local but supermarket when out of season", kg: 190 },
+            { value: "Mainly/all supermarket, fresh food", kg: 490 },
+            { value: "Mainly/all supermarket, processed food", kg: 690 },
         ]
     }
 
