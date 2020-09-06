@@ -36,5 +36,7 @@ export default {
 </script>
 
 <style>
-
+input {
+    margin: 0px 6px;
+}
 </style>
