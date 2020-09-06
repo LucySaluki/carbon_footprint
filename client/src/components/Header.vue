@@ -15,11 +15,11 @@ export default {
 <style scoped>
 
 img{
-  position:fixed;
-  left:50%;
+  position:relative;
+  left:45%;
 }
 h1{
-  margin-top:230px;
+
   text-align: center;
 }
 </style>
