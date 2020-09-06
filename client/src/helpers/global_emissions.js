@@ -39,7 +39,7 @@ export const eiaDataApi = function (restCountries) {
                     }
                 });
                 // filter out null/no data countries and sort alphabetically
-                return latest.filter(el => el && el.emissions > 0).sort((a, b) => (a >= b) ? 1 : -1);
+                return latest.filter(el => el && el.emissions > 0).sort((a, b) => (a.country >= b.country) ? 1 : -1);
             });
         });
 }
