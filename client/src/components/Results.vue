@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h3>Your Carbon Footprint</h3>
+  <h3>Your Carbon Footprint (tonnes of CO2 per annum)</h3>
   <GChart id="gauge-chart" :type="chartType" :settings="chartSettings" :data="currentUser" :options="chartOptions"/>
 </div>
 </template>
@@ -16,7 +16,6 @@ export default {
   data () {
     return {
       chartOptions: {
-        title: "Carbon Footprint (tonnes of CO2 per annum)",
         width: 200,
         height:200,
         redFrom:12, redTo: 15,

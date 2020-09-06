@@ -62,6 +62,7 @@ export default {
         eventBus.$emit("user-selected", this.selected);
       }
       this.selected = null;
+
     }
   }
 }
