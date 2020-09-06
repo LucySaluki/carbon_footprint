@@ -71,17 +71,6 @@ export default {
     eventBus.$on("save-answers", (payload) => {
         this.selectedUser.answers = payload;
 
-        // const numPeopleInHouse = parseInt(payload.numPeopleInHouse);
-        // const sizeOfHouse = payload.sizeOfHouse;
-        // const fuelUsage = payload.fuelUsage;
-        // const recycling = payload.recycling;
-        // const carsInHousehold = payload.carsInHousehold;
-        // const travelByTrain = parseInt(payload.travelByTrain);
-        // const travelByBus = parseInt(payload.travelByBus);
-        // const travelByPlane = parseInt(payload.travelByPlane);
-        // const foodMiles = payload.foodMiles;
-        const weeklyDiet = payload.weeklyDiet;
-
         let score = this.questions.reduce((total, question) => {
           return total + question.basekg
         }, 0);
