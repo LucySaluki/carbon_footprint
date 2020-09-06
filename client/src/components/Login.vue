@@ -57,11 +57,11 @@ export default {
           score: null,
           answers: {}
         }
-        UserService.postUser(newUser);
-        this.selected = newUser;
+        UserService.postUser(newUser).then(user => eventBus.$emit("user-selected", user));
+      } else {
+        eventBus.$emit("user-selected", this.selected);
+        this.selected = null;
       }
-      eventBus.$emit("user-selected", this.selected);
-      this.selected = null;
     }
   }
 }
