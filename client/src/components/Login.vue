@@ -60,8 +60,9 @@ export default {
         UserService.postUser(newUser).then(user => eventBus.$emit("user-selected", user));
       } else {
         eventBus.$emit("user-selected", this.selected);
-        this.selected = null;
       }
+      this.selected = null;
+
     }
   }
 }

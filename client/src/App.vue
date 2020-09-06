@@ -1,13 +1,12 @@
 <template>
   <main>
-    <!--just something to show it's rendering-->
     <HeaderPage />
     <!-- Render the login component if NO user is selected (selectedUser === null) -->
     <LoginPage v-if="!selectedUser" :users="users" :countries="countries" />
 
-    <!-- ELSE render the questions component UNLESS selected user has no answers (selectedUser.answers === {}) -->
+    <!-- ELSE render the questions component UNLESS selected user has no score (selectedUser.score === null) -->
     <QuestionsPage
-      v-else-if="!Object.keys(selectedUser.answers).length"
+      v-else-if="!selectedUser.score"
       :questions="questions"
       :selectedUser="selectedUser"
     />
@@ -67,6 +66,10 @@ export default {
       this.selectedUser = payload;
       this.users.push(payload);
     });
+
+    eventBus.$on("go-home", () => {
+      this.selectedUser = null;
+    })
 
     eventBus.$on("save-answers", (payload) => {
         this.selectedUser.answers = payload;
