@@ -63,8 +63,11 @@ export default {
     });
 
     eventBus.$on("user-selected", (payload) => {
+      console.log(payload);
       this.selectedUser = payload;
-      this.users.push(payload);
+      if (!this.users.find(user => user=== payload)){
+        this.users.push(payload);
+      }
     });
 
     eventBus.$on("go-home", () => {
