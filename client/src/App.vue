@@ -137,7 +137,7 @@ export default {
 
         this.selectedUser.score = Math.round(score) / 1000;
 
-        UserService.updateUser(this.selectedUser._id, this.selectedUser);
+        UserService.updateUser(this.selectedUser._id, this.selectedUser).then(updated => this.selectedUser = updated);
     });
   },
   methods: {
