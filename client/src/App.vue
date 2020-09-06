@@ -13,7 +13,7 @@
     />
 
     <!-- ELSE render the results component -->
-    <ResultsPage :selectedUser="selectedUser"/>
+    <ResultsPage v-else :selectedUser="selectedUser"/>
   </main>
 </template>
 
