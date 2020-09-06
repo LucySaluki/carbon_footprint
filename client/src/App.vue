@@ -54,7 +54,9 @@ export default {
     fetch("https://restcountries.eu/rest/v2/all")
     .then(res => res.json())
     .then(data => {
-      this.countries = data.sort((a,b) => (a.name >= b.name) ? 1:-1);
+      // set UK name to United Kingdom not United Kingdom of Great Britain and Northern Ireland
+      data.find(el => el.alpha3Code === "GBR").name = "United Kingdom";
+      this.countries = data.sort((a,b) => (a.name >= b.name) ? 1 : -1);
     // then grab global emissions data
       eiaDataApi(this.countries).then((res) => {
         this.globalEmissions = res;
