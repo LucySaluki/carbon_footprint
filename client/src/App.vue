@@ -50,11 +50,15 @@ export default {
     this.fetchQuestions();
     this.fetchUsers();
 
+    // grab the countries list from the restcountries api
     fetch("https://restcountries.eu/rest/v2/all")
     .then(res => res.json())
     .then(data => {
-      this.countries = data;
-      eiaDataApi(data).then((res) => (this.globalEmissions = res));
+      this.countries = data.sort((a,b) => (a >= b) ? 1:-1);
+    // then grab global emissions data
+      eiaDataApi(this.countries).then((res) => {
+        this.globalEmissions = res;
+      });
     });
 
     eventBus.$on("user-selected", (payload) => {
