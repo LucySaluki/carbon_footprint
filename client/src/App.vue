@@ -71,15 +71,15 @@ export default {
     eventBus.$on("save-answers", (payload) => {
         this.selectedUser.answers = payload;
 
-        const numPeopleInHouse = parseInt(payload.numPeopleInHouse);
-        const sizeOfHouse = payload.sizeOfHouse;
-        const fuelUsage = payload.fuelUsage;
-        const recycling = payload.recycling;
-        const carsInHousehold = payload.carsInHousehold;
-        const travelByTrain = parseInt(payload.travelByTrain);
-        const travelByBus = parseInt(payload.travelByBus);
-        const travelByPlane = parseInt(payload.travelByPlane);
-        const foodMiles = payload.foodMiles;
+        // const numPeopleInHouse = parseInt(payload.numPeopleInHouse);
+        // const sizeOfHouse = payload.sizeOfHouse;
+        // const fuelUsage = payload.fuelUsage;
+        // const recycling = payload.recycling;
+        // const carsInHousehold = payload.carsInHousehold;
+        // const travelByTrain = parseInt(payload.travelByTrain);
+        // const travelByBus = parseInt(payload.travelByBus);
+        // const travelByPlane = parseInt(payload.travelByPlane);
+        // const foodMiles = payload.foodMiles;
         const weeklyDiet = payload.weeklyDiet;
 
         let score = this.questions.reduce((total, question) => {
@@ -89,13 +89,13 @@ export default {
         let houseScore = 0;
 
         this.questions[1].answers.forEach((answer) => {
-            if (answer.value === sizeOfHouse){
+            if (answer.value === payload.sizeOfHouse){
                 houseScore += answer.kg
             }
         })
 
         this.questions[2].answers.forEach((answer) => {
-            fuelUsage.forEach((fuel) => {
+            payload.fuelUsage.forEach((fuel) => {
               if (answer.value === fuel){
                   houseScore += answer.kg
               }
@@ -103,7 +103,7 @@ export default {
         })
 
         this.questions[3].answers.forEach((answer) => {
-            recycling.forEach((choice) => {
+            payload.recycling.forEach((choice) => {
                 if (answer.value === choice){
                     houseScore += answer.kg
                 }
@@ -111,26 +111,26 @@ export default {
         })
 
         this.questions[4].answers.forEach((answer) => {
-            if (answer.value === carsInHousehold){
+            if (answer.value === payload.carsInHousehold){
                 houseScore += answer.kg
             }
         })
-        score += houseScore / numPeopleInHouse;
+        score += houseScore / payload.numPeopleInHouse;
 
-        score += this.questions[5].answers[0].kg * travelByBus;
+        score += this.questions[5].answers[0].kg * payload.travelByBus;
             
-        score += this.questions[6].answers[0].kg * travelByTrain;
+        score += this.questions[6].answers[0].kg * payload.travelByTrain;
 
-        score += this.questions[7].answers[0].kg * travelByPlane;
+        score += this.questions[7].answers[0].kg * payload.travelByPlane;
 
         this.questions[8].answers.forEach((answer) => {
-            if (answer.value === weeklyDiet){
+            if (answer.value === payload.weeklyDiet){
                 score += answer.kg
             }
         })
 
         this.questions[9].answers.forEach((answer) => {
-            if (answer.value === foodMiles){
+            if (answer.value === payload.foodMiles){
                 score += answer.kg
             }
         })
