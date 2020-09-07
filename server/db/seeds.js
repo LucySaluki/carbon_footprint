@@ -31,7 +31,7 @@ db.users.insertMany([
     {
         name: "Ally",
         score: 13.871,
-        country: "Scotland",
+        country: "United Kingdom",
         answers: {
             carsInHousehold: 2,
             foodMiles: "Mainly/all supermarket, fresh food",
@@ -49,7 +49,7 @@ db.users.insertMany([
     {
         name: "Jarrod",
         score: 7.791,
-        country: "Scotland",
+        country: "United Kingdom",
         answers: {
             carsInHousehold: 0,
             foodMiles: "Mostly own garden/locally",

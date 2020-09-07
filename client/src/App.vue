@@ -1,6 +1,7 @@
 <template>
   <main>
     <HeaderPage />
+    <!-- <MapPage :globalEmissions="globalEmissions"/> -->
     <!-- Render the login component if NO user is selected (selectedUser === null) -->
     <LoginPage v-if="!selectedUser" :users="users" :countries="countries" />
 
@@ -21,6 +22,7 @@ import LoginPage from "@/components/Login.vue";
 import QuestionsPage from "@/components/Questions.vue";
 import ResultsPage from "@/components/Results.vue";
 import HeaderPage from "@/components/Header.vue";
+import MapPage from "@/components/Map.vue"
 import QuestionService from "./services/QuestionService";
 import UserService from "./services/UserService";
 
@@ -35,6 +37,7 @@ export default {
     QuestionsPage,
     LoginPage,
     HeaderPage,
+    MapPage
   },
   data() {
     return {
@@ -151,7 +154,8 @@ export default {
         this.users = users;
 
       });
-    },
+    }
+
   },
 };
 </script>
