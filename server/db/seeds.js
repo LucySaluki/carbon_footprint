@@ -7,30 +7,35 @@ db.users.insertMany([
     {
         name: "Jonny",
         score: null,
+        newScore: null,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Duncan",
         score: null,
+        newScore: null,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Lucy",
         score: null,
+        newScore: null,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Vishal",
         score: null,
+        newScore: null,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Ally",
         score: 13.871,
+        newScore: null,
         country: "United Kingdom",
         answers: {
             carsInHousehold: 2,
@@ -49,6 +54,7 @@ db.users.insertMany([
     {
         name: "Jarrod",
         score: 7.791,
+        newScore: null,
         country: "United Kingdom",
         answers: {
             carsInHousehold: 0,
@@ -70,6 +76,7 @@ db.questions.insertMany([
     {
         key: "numPeopleInHouse",
         title: "How many people live in your house?",
+        category: "home",
         type: "number",
         basekg: 0,
         answers: [
@@ -79,6 +86,7 @@ db.questions.insertMany([
     {
         key: "sizeOfHouse",
         title: "What size is your house?",
+        category: "home",
         type: "radio",
         basekg: 0,
         answers: [
@@ -90,6 +98,7 @@ db.questions.insertMany([
     {
         key: "fuelUsage",
         title: "Do you use these fuels in your home?",
+        category: "home",
         type: "checkbox",
         basekg: 0,
         answers: [
@@ -102,6 +111,7 @@ db.questions.insertMany([
     {
         key: "recycling",
         title: "Do you recycle?",
+        category: "home",
         type: "checkbox",
         basekg: 3400,
         answers: [
@@ -112,6 +122,7 @@ db.questions.insertMany([
     {
         key: "carsInHousehold",
         title: "How many cars does your household use?",
+        category: "home",
         type: "radio",
         basekg: 0,
         answers: [
@@ -125,6 +136,7 @@ db.questions.insertMany([
     {
         key: "travelByBus",
         title: "Number of miles travelled by bus per week",
+        category: "travel",
         type: "number",
         basekg: 0,
         answers: [
@@ -134,6 +146,7 @@ db.questions.insertMany([
     {
         key: "travelByTrain",
         title: "Number of miles travelled by train per week",
+        category: "travel",
         type: "number",
         basekg: 0,
         answers: [
@@ -143,6 +156,7 @@ db.questions.insertMany([
     {
         key: "travelByPlane",
         title: "Number of hours travelled by plane per year",
+        category: "travel",
         type: "number",
         basekg: 0,
         answers: [
@@ -152,6 +166,7 @@ db.questions.insertMany([
     {
         key: "weeklyDiet",
         title: "What is your typical weekly diet?",
+        category: "food",
         type: "radio",
         basekg: 0,
         answers: [
@@ -164,6 +179,7 @@ db.questions.insertMany([
     {
         key: "foodMiles",
         title: "Where does your food come from?",
+        category: "food",
         type: "radio",
         basekg: 0,
         answers: [
