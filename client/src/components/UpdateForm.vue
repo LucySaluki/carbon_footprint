@@ -1,15 +1,15 @@
 <template>
-    <main>
+    <main id="main">
         <div>
             <span>Categories: </span>
-        <input
-            type="button"
-            v-for="(category, index) in categories"
-            :key="index"
-            :value="category"
-            class="tab-button"
-            v-on:click="showQuestions(category)"
-        />
+            <input
+                type="button"
+                v-for="(category, index) in categories"
+                :key="index"
+                :value="category"
+                class="tab-button"
+                v-on:click="showQuestions(category)"
+            />
         </div>
         <form v-on:submit.prevent="updateAnswers">
             <article>
@@ -91,6 +91,10 @@ export default {
 </script>
 
 <style scoped>
+#main {
+    margin: 40px;
+    padding: 10px;
+}
 article {
     display: grid;
     grid-template-columns: 1fr 1fr;
