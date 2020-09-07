@@ -23,6 +23,7 @@ import ResultsPage from "@/components/Results.vue";
 import HeaderPage from "@/components/Header.vue";
 import QuestionService from "./services/QuestionService";
 import UserService from "./services/UserService";
+import {calculation} from "@/helpers/calculation.js"
 
 import { eventBus } from "@/main.js";
 
@@ -80,62 +81,7 @@ export default {
     })
 
     eventBus.$on("save-answers", (payload) => {
-        this.selectedUser.answers = payload;
-
-        let score = this.questions.reduce((total, question) => {
-          return total + question.basekg
-        }, 0);
-
-        let houseScore = 0;
-
-        this.questions[1].answers.forEach((answer) => {
-            if (answer.value === payload.sizeOfHouse){
-                houseScore += answer.kg
-            }
-        })
-
-        this.questions[2].answers.forEach((answer) => {
-            payload.fuelUsage.forEach((fuel) => {
-              if (answer.value === fuel){
-                  houseScore += answer.kg
-              }
-            })
-        })
-
-        this.questions[3].answers.forEach((answer) => {
-            payload.recycling.forEach((choice) => {
-                if (answer.value === choice){
-                    houseScore += answer.kg
-                }
-            })
-        })
-
-        this.questions[4].answers.forEach((answer) => {
-            if (answer.value === payload.carsInHousehold){
-                houseScore += answer.kg
-            }
-        })
-        score += houseScore / payload.numPeopleInHouse;
-
-        score += this.questions[5].answers[0].kg * payload.travelByBus;
-            
-        score += this.questions[6].answers[0].kg * payload.travelByTrain;
-
-        score += this.questions[7].answers[0].kg * payload.travelByPlane;
-
-        this.questions[8].answers.forEach((answer) => {
-            if (answer.value === payload.weeklyDiet){
-                score += answer.kg
-            }
-        })
-
-        this.questions[9].answers.forEach((answer) => {
-            if (answer.value === payload.foodMiles){
-                score += answer.kg
-            }
-        })
-
-        this.selectedUser.score = Math.round(score) / 1000;
+        this.selectedUser.score = calculation(payload, this.selectedUser, this.questions)
 
         UserService.updateUser(this.selectedUser._id, this.selectedUser);
     });
@@ -144,62 +90,9 @@ export default {
     eventBus.$on("update-answers", (payload) => {
         this.selectedUser.answers = payload;
 
-        let score = this.questions.reduce((total, question) => {
-          return total + question.basekg
-        }, 0);
+        this.selectedUser.score = calculation(payload, this.selectedUser, this.questions)
 
-        let houseScore = 0;
-
-        this.questions[1].answers.forEach((answer) => {
-            if (answer.value === payload.sizeOfHouse){
-                houseScore += answer.kg
-            }
-        })
-
-        this.questions[2].answers.forEach((answer) => {
-            payload.fuelUsage.forEach((fuel) => {
-              if (answer.value === fuel){
-                  houseScore += answer.kg
-              }
-            })
-        })
-
-        this.questions[3].answers.forEach((answer) => {
-            payload.recycling.forEach((choice) => {
-                if (answer.value === choice){
-                    houseScore += answer.kg
-                }
-            })
-        })
-
-        this.questions[4].answers.forEach((answer) => {
-            if (answer.value === payload.carsInHousehold){
-                houseScore += answer.kg
-            }
-        })
-        score += houseScore / payload.numPeopleInHouse;
-
-        score += this.questions[5].answers[0].kg * payload.travelByBus;
-            
-        score += this.questions[6].answers[0].kg * payload.travelByTrain;
-
-        score += this.questions[7].answers[0].kg * payload.travelByPlane;
-
-        this.questions[8].answers.forEach((answer) => {
-            if (answer.value === payload.weeklyDiet){
-                score += answer.kg
-            }
-        })
-
-        this.questions[9].answers.forEach((answer) => {
-            if (answer.value === payload.foodMiles){
-                score += answer.kg
-            }
-        })
-
-        this.selectedUser.score = Math.round(score) / 1000;
-
-        // UserService.updateUser(this.selectedUser._id, this.selectedUser);
+        UserService.updateUser(this.selectedUser._id, this.selectedUser);
     });
   },
   methods: {
