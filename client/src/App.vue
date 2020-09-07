@@ -92,6 +92,11 @@ export default {
 
         UserService.updateUser(this.selectedUser._id, this.selectedUser).then((data) => this.selectedUser = data);
     });
+        
+    eventBus.$on("question-item-update", (payload) => {
+        this.selectedUser.answers[payload.question] = payload.answer;
+        this.selectedUser.newScore = calculation(this.selectedUser.answers, this.selectedUser, this.questions)
+    });
   },
   methods: {
     fetchQuestions() {

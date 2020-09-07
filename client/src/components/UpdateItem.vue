@@ -7,6 +7,7 @@
         <div v-for="(answer, index) in question.answers" :key="index"> 
             <input 
                 v-on:change ="handleInput"
+                v-on:keyup="handleInput"
                 :type="question.type"
                 :id="answer.value"
                 :value="answer.value"
