@@ -18,7 +18,9 @@ export default {
     components: {UpdateItem},
     props: ['questions', 'selectedUser'],
     data() {
-        answers: {}
+        return {
+            answers: {}
+        }
     },
     methods: {
         updateAnswers : function() {
