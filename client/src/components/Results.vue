@@ -11,11 +11,10 @@ import UpdateForm from "@/components/UpdateForm.vue";
 export default {
   name: "results",
   props: ["selectedUser", "questions"],
-
   components: {
     ResultsDial,
     UpdateForm
-  }
+  },
 
 }
 </script>
