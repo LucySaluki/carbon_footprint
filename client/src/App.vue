@@ -83,16 +83,14 @@ export default {
     eventBus.$on("save-answers", (payload) => {
         this.selectedUser.score = calculation(payload, this.selectedUser, this.questions)
 
-        UserService.updateUser(this.selectedUser._id, this.selectedUser);
+        UserService.updateUser(this.selectedUser._id, this.selectedUser).then((data) => this.selectedUser = data);
     });
 
     //////update answers calculation
     eventBus.$on("update-answers", (payload) => {
-        this.selectedUser.answers = payload;
-
         this.selectedUser.score = calculation(payload, this.selectedUser, this.questions)
 
-        UserService.updateUser(this.selectedUser._id, this.selectedUser);
+        UserService.updateUser(this.selectedUser._id, this.selectedUser).then((data) => this.selectedUser = data);
     });
   },
   methods: {
