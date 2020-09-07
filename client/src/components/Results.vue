@@ -5,16 +5,19 @@
     <p>Your Results</p>
     <ResultsDial v-if="globalEmissions" :data="newCountryScore"/>
     <p>The Average for Your Country</p>
+    <UpdateForm :selectedUser="selectedUser" :questions="questions" /> 
   </div>
 </template>
 
 <script>
 import ResultsDial from "@/components/ResultsDial.vue";
+import UpdateForm from "@/components/UpdateForm.vue";
 export default {
   name: "results",
-  props: ['selectedUser', 'globalEmissions'],
+  props: ['selectedUser', 'globalEmissions', 'questions'],
   components: {
-    ResultsDial
+    ResultsDial,
+    UpdateForm
   },
   data(){
     return {
