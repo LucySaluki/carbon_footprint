@@ -24,10 +24,20 @@ export default {
     },
     methods: {
         updateAnswers : function() {
+            this.questions.forEach(question => {
+                if (!this.answers[question.key]) {
+                    this.answers[question.key] = [];
+                }
+            });
             eventBus.$emit("update-answers", this.answers);
         }
 
     },
+    mounted() {
+        eventBus.$on("question-item-update", (payload) => {
+            this.answers[payload.question] = payload.answer;
+        })
+    }
 
 
 }

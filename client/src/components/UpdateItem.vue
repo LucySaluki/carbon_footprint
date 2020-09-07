@@ -25,9 +25,9 @@ export default {
 
     methods: {
         handleInput: function () {
-            eventBus.$emit("question-item-input", {
+            eventBus.$emit("question-item-update", {
                 question: this.question.key,
-                answer: (this.question.type === "number") ? Number(this.inputAnswer) : this.inputAnswer,
+                answer: (this.question.type === "number") ? Number(this.selectedUser.answers[this.question.key]) : this.selectedUser.answers[this.question.key],
             });
         },
     
@@ -35,6 +35,6 @@ export default {
 }
 </script>
 
-<style>
+<style></style>
 
 </style>

@@ -23,6 +23,11 @@ export default {
     },
     methods: {
         saveAnswers: function () {
+              this.questions.forEach(question => {
+                if (!this.answers[question.key]) {
+                    this.answers[question.key] = [];
+                }
+            });
             eventBus.$emit("save-answers", this.answers);
         }
     },
