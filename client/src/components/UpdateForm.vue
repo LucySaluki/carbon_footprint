@@ -26,7 +26,7 @@ export default {
         updateAnswers : function() {
             this.questions.forEach(question => {
                 if (!this.answers[question.key]) {
-                    this.answers[question.key] = [];
+                    this.answers[question.key] = this.selectedUser.answers[question.key];
                 }
             });
             eventBus.$emit("update-answers", this.answers);
