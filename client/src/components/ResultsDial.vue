@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h3>Your Carbon Footprint (tonnes of CO2 per annum)</h3>
   <GChart id="gauge-chart" :type="chartType" :settings="chartSettings" :data="currentUser" :options="chartOptions"/>
+  <p>Your results compared to the average for your country.</p>
 </div>
 </template>
 
@@ -16,8 +16,8 @@ export default {
   data () {
     return {
       chartOptions: {
-        width: 200,
-        height:200,
+        width: 400,
+        height:400,
         redFrom:12, redTo: 15,
         yellowFrom:7.5, yellowTo: 12,
         minorTicks: 1,
@@ -29,7 +29,7 @@ export default {
       }
     }
   },
-  props: ['selectedUser'],
+  props: ['selectedUser', 'globalEmissions'],
   computed: {currentUser: function(){
       if (this.selectedUser) {
         return this.getUserScore(this.selectedUser);
@@ -38,9 +38,14 @@ export default {
   }},
   methods: {
     getUserScore: function(cUser){
+      const countryUser=cUser.country;
       const currentUser=[['label','score']];
-      const newUserScore=['C02',cUser.score];
+      const newUserScore=['Your C02',cUser.score];
       currentUser.push(newUserScore);
+      const emissionCountries=this.globalEmissions
+      const countryAvg = emissionCountries.find(el => el.country===countryUser);
+      const newCountryScore=['Avg.CO2',countryAvg.avg];
+      currentUser.push(newCountryScore);
       return currentUser;
     }
   }

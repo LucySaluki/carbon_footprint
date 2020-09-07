@@ -1,12 +1,15 @@
 <template>
-  <ResultsDial :selectedUser="selectedUser" />
+  <div>
+    <h3>Carbon Footprint comparative results (tonnes of CO2 per annum)</h3>
+    <ResultsDial :selectedUser="selectedUser" :globalEmissions="globalEmissions"/>
+  </div>
 </template>
 
 <script>
 import ResultsDial from "@/components/ResultsDial.vue";
 export default {
   name: "results",
-  props: ["selectedUser"],
+  props: ["selectedUser",'globalEmissions'],
   components: {
     ResultsDial
   }
