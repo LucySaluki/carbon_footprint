@@ -58,6 +58,7 @@ export default {
           name: this.name,
           country: this.country,
           score: null,
+          newScore: 0,
           answers: {}
         }
         UserService.postUser(newUser).then(user => eventBus.$emit("user-selected", user));
