@@ -16,6 +16,8 @@
         <p class="your-country" v-if="globalEmissions">The Average for Your Country</p>
       </div>
     </div>
+    <EveryoneLikeMe v-if="globalEmissions" :selectedUser="selectedUser" :globalEmissions="globalEmissions" />
+    <section v-else>Loading...</section>
     <UpdateForm :selectedUser="selectedUser" :questions="questions" />
   </div>
 </template>
@@ -23,12 +25,14 @@
 <script>
 import ResultsDial from "@/components/ResultsDial.vue";
 import UpdateForm from "@/components/UpdateForm.vue";
+import EveryoneLikeMe from "@/components/EveryoneLikeMe.vue";
 export default {
   name: "results",
   props: ["selectedUser", "globalEmissions", "questions"],
   components: {
     ResultsDial,
     UpdateForm,
+    EveryoneLikeMe
   },
   data() {
     return {
