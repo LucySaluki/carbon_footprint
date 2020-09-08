@@ -26,4 +26,10 @@ describe("QuestionItem.vue", () => {
         const inputs = wrapper.findAll("input");
         expect(inputs).toHaveLength(3);
     });
+    it("should set inputAnswer to the value of the input when triggered.", async () => {
+        const input = wrapper.find("input");
+        input.trigger("change");
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.inputAnswer).toMatch("Small");
+    });
 });
