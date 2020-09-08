@@ -40,7 +40,7 @@ export default {
       this.newUserScore.push(newUserValue);
     },
     startScore:function(cUser) {
-      const newUserScoreValue=['CO2',this.selectedUser.newScore];
+      const newUserScoreValue=['CO2',0];
       this.newUpdateScore.push(newUserScoreValue);
     }
   },
@@ -49,14 +49,17 @@ export default {
       const currUser=this.selectedUser.country;
       const emissionCountries=this.globalEmissions;
       const countryAvg = emissionCountries.find(el => el.country===currUser);
-      const newCountryValue=['CO2',countryAvg.avg];
-      this.newCountryScore.push(newCountryValue);
+      const newCountryValue=[['label','score'],['CO2',countryAvg.avg]];
+      this.newCountryScore=newCountryValue;
     },
     selectedUser:{
       handler:function() {
       if (this.selectedUser.newScore!==this.selectedUser.score) {
         const updatedScore = [['label','score'],['CO2',this.selectedUser.newScore]]
         this.newUpdateScore=updatedScore;
+      } else {
+        const newScoreValue = [['label','score'],['CO2',this.selectedUser.score]]
+        this.newUserScore=newScoreValue;
       }
     },
     deep:true

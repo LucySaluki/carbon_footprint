@@ -17,10 +17,10 @@ export default {
       chartOptions: {
         width: 200,
         height:200,
-        redFrom:18, redTo: 20,
-        yellowFrom:12, yellowTo: 18,
+        redFrom:35, redTo: 50,
+        yellowFrom:20, yellowTo: 35,
         minorTicks: 1,
-        max:20
+        max:50
       },
       chartType:"Gauge",
       chartSettings:{
