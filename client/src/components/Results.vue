@@ -40,7 +40,7 @@ export default {
       this.newUserScore.push(newUserValue);
     },
     startScore:function(cUser) {
-      const newUserScoreValue=['CO2',0.0];
+      const newUserScoreValue=['CO2',this.selectedUser.newScore];
       this.newUpdateScore.push(newUserScoreValue);
     }
   },

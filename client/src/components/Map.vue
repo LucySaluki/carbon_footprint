@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>MapTitle</h3>
+        <h3>World Carbon Dioxide Production per Capita (tonnes)</h3>
         <GChart
             id="gauge-chart"
             type="GeoChart"

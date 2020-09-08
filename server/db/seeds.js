@@ -7,35 +7,35 @@ db.users.insertMany([
     {
         name: "Jonny",
         score: null,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Duncan",
         score: null,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Lucy",
         score: null,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Vishal",
         score: null,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {}
     },
     {
         name: "Ally",
         score: 13.871,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {
             carsInHousehold: 2,
@@ -54,7 +54,7 @@ db.users.insertMany([
     {
         name: "Jarrod",
         score: 7.791,
-        newScore: null,
+        newScore: 0,
         country: "United Kingdom",
         answers: {
             carsInHousehold: 0,
