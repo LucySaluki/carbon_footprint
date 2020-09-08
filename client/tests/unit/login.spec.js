@@ -61,7 +61,16 @@ describe('Login.vue', () => {
         wrapper.setData({name: "Jonny"})
         await wrapper.vm.$nextTick();
         const textBox = wrapper.find('#name');
-        // textBox.setData({value: "Jonny"});
         expect(textBox.element.value).toMatch("Jonny");
+    });
+
+    it('should render user name and country if selected is equal to a user.', async () => {
+      wrapper.setData({selected: wrapper.vm.users[1]});
+      await wrapper.vm.$nextTick();
+      const userDetails = wrapper.findAll('p');
+      const userName = userDetails.at(0).element;
+      const userCountry = userDetails.at(1).element;
+      expect(userName.textContent).toMatch('Name: Ally');
+      expect(userCountry.textContent).toMatch('Country: Albania')
     })
 })
