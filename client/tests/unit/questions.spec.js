@@ -21,4 +21,7 @@ describe("Questions.vue", () => {
     it("should have a selected user.", () => {
         expect(wrapper.vm.selectedUser.name).toMatch("Vishal");
     });
+    it("should have an empty answers data object.", () => {
+        expect(wrapper.vm.answers).toEqual({});
+    })
 })
