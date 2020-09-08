@@ -31,4 +31,8 @@ describe("UpdateForm.vue", () => {
         const updateItems = wrapper.find("article");
         expect(updateItems.element.children).toHaveLength(3);
     });
+    it("should have a number of categories.", () => {
+        expect(wrapper.vm.categories).toHaveLength(2);
+    });
+
 });
