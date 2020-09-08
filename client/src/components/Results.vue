@@ -59,13 +59,10 @@ export default {
     },
     selectedUser:{
       handler:function() {
-      if (this.selectedUser.newScore!==this.selectedUser.score) {
         const updatedScore = [['label','score'],['CO2',this.selectedUser.newScore]]
         this.newUpdateScore=updatedScore;
-      } else {
         const newScoreValue = [['label','score'],['CO2',this.selectedUser.score]]
         this.newUserScore=newScoreValue;
-      }
     },
     deep:true
     }
