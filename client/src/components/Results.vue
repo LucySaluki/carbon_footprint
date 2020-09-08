@@ -33,6 +33,9 @@ export default {
   mounted() {
         this.getUserScore(this.selectedUser);
         this.startScore(this.selectedUser);
+        if (this.globalEmissions) {
+          this.loadGlobalEmissions(this.selectedUser);
+        }
       },
   methods: {
     getUserScore: function(cUser){
@@ -42,15 +45,17 @@ export default {
     startScore:function(cUser) {
       const newUserScoreValue=['CO2',0];
       this.newUpdateScore.push(newUserScoreValue);
+    },
+    loadGlobalEmissions:function(cUser){
+      const emissionCountries=this.globalEmissions;
+      const countryAvg = emissionCountries.find(el => el.country===cUser.country);
+      const newCountryValue=[['label','score'],['CO2',countryAvg.avg]];
+      this.newCountryScore=newCountryValue;
     }
   },
   watch: {
     globalEmissions:function(){
-      const currUser=this.selectedUser.country;
-      const emissionCountries=this.globalEmissions;
-      const countryAvg = emissionCountries.find(el => el.country===currUser);
-      const newCountryValue=[['label','score'],['CO2',countryAvg.avg]];
-      this.newCountryScore=newCountryValue;
+      this.loadGlobalEmissions(this.selectedUser);
     },
     selectedUser:{
       handler:function() {
