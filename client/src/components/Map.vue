@@ -1,41 +1,50 @@
 <template>
     <div>
     <h3>World Carbon Dioxide Production per Capita (tonnes)</h3>
-    <GChart id="gauge-chart" :type="chartType" :settings="chartSettings" :data="mapData" :options="chartOptions"/>
+        <GChart
+            id="gauge-chart"
+            type="GeoChart"
+            :data="chartData"
+            :options="chartOptions"
+            :settings="settings"
+        />
     </div>
 </template>
 
 <script>
-import { GChart } from 'vue-google-charts';
-import { GEO_API_KEY } from "../secrets.js";
+import { GChart } from "vue-google-charts";
 
 export default {
-    name:'map-page',
+    name: "map-page",
     components: {
-    GChart
-  },
-  data () {
-    return { 
-      chartType:"GeoChart",
-      chartSettings:{
-        packages:['geochart']
-      },
-      chartOptions:{
-        mapsApiKey: GEO_API_KEY
-      }
-    }
-  },
-  props: ['globalEmissions'],
-  computed: {mapData: function() {
-      const mapData=[['Country','Value']];
-      const countryData=["Sweden",6.4];
-      mapData.push(countryData);
-      console.log(mapData);
-      return mapData;
-  }}
-}
+        GChart,
+    },
+    data() {
+        return {
+            chartOptions: {
+                colorAxis: {minValue: 0,  colors: ['#B9FFB7', '#000000']}
+            },
+            settings: { packages: ["geochart"]},
+        };
+    },
+    props: ["globalEmissions"],
+    computed: {
+        chartData: function () {
+            const gibraltar = this.globalEmissions.findIndex(
+                (el) => el.country === "Gibraltar"
+            );
+            if (gibraltar >= 0) {
+                this.globalEmissions.splice(gibraltar, 1);
+            }
+            const data = [["Country", "Emissions"]];
+            this.globalEmissions.forEach((country) => {
+                data.push([country.countryShortCode, country.avg]);
+            });
+            return data;
+        },
+    },
+};
 </script>
 
 <style>
-
 </style>

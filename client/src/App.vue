@@ -1,7 +1,6 @@
 <template>
   <main>
     <HeaderPage />
-    <MapPage :globalEmissions="globalEmissions"/>
     <!-- Render the login component if NO user is selected (selectedUser === null) -->
     <LoginPage v-if="!selectedUser" :users="users" :countries="countries" />
 
@@ -15,6 +14,7 @@
     <!-- ELSE render the results component -->
     <ResultsPage v-else :selectedUser="selectedUser" :globalEmissions="globalEmissions" :questions="questions"/>
 
+    <MapPage v-if="globalEmissions" :globalEmissions="globalEmissions"/>
   </main>
 </template>
 
