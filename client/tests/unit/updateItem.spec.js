@@ -1,25 +1,26 @@
 import { shallowMount } from '@vue/test-utils';
-import UpdateItem from '@/components/UpdateItem';
-import { questionData } from './questions';
+import UpdateItem from '@/components/UpdateItem.vue';
+import { questionsData } from './questions.js';
+import { usersData } from './users';
 
-describe ("UpdateItem.vue", () => {
+describe("UpdateItem.vue", () => {
   let wrapper;
-  beforeEach(async () =>{
+  beforeEach(async () => {
       wrapper = shallowMount(UpdateItem, {
           propsData: {
-              question: questionData[1]
+              question: questionsData[1],
+              selectedUser: usersData[1]
           }
       });
-      await wrapper.vm.$nextTick();
+      await wrapper.vm.$nextTick()
   });
 
-  it('should have a question as a prop')
+  it('should have a question as a prop.', () => {
+    expect(wrapper.vm.question.key).toMatch("fuelUsage")
+  });
 
-  it('should render a question title')
-
-  it('should render the correct number of inputs')
-
-  it('should render the correct type of input')
-
-  it('should set the inputAnswer to the input on change')
-})
+  it('should render a question title.', () => {
+    const questionTitle = wrapper.find('h2');
+    expect(questionTitle.element.textContent).toMatch("Do you use these fuels in your home?")
+  });
+});
