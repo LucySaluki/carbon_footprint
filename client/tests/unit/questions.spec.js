@@ -17,11 +17,16 @@ describe("Questions.vue", () => {
     });
     it("should have a questions prop.", () => {
         expect(wrapper.vm.questions).toHaveLength(3);
+        expect(wrapper.vm.questions[1].key).toMatch("fuelUsage");
     });
     it("should have a selected user.", () => {
         expect(wrapper.vm.selectedUser.name).toMatch("Vishal");
     });
     it("should have an empty answers data object.", () => {
         expect(wrapper.vm.answers).toEqual({});
+    });
+    it("should have the right number of QuestionItems.", () => {
+        const questionItems = wrapper.find("form");
+        expect(questionItems.element.children).toHaveLength(4);
     })
 })
