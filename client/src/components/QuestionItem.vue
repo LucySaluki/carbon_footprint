@@ -7,10 +7,13 @@
             <div v-for="(answer, index) in question.answers" :key="index">
                 <input
                     v-on:change="handleInput"
+                    v-on:keyup="handleInput"
+                    v-on:input="handleInput"
                     :type="question.type"
                     :id="answer.value"
                     :value="answer.value"
                     v-model="inputAnswer"
+                    min=0
                 />
                 <label :for="answer.value">{{ answer.value }}</label>
             </div>
