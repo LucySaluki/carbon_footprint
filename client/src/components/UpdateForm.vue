@@ -77,7 +77,7 @@ export default {
             this.answers[payload.question] = payload.answer;
         });
         this.$nextTick(() => {
-            this.showQuestions("home");
+            this.showQuestions("household");
             document.querySelector(".tab-button").classList.add("active");
         });
     },
