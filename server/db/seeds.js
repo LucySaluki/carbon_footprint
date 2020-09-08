@@ -76,7 +76,7 @@ db.questions.insertMany([
     {
         key: "numPeopleInHouse",
         title: "How many people live in your house?",
-        category: "home",
+        category: "household",
         type: "number",
         basekg: 0,
         answers: [
@@ -86,7 +86,7 @@ db.questions.insertMany([
     {
         key: "sizeOfHouse",
         title: "What size is your house?",
-        category: "home",
+        category: "household",
         type: "radio",
         basekg: 0,
         answers: [
@@ -98,7 +98,7 @@ db.questions.insertMany([
     {
         key: "fuelUsage",
         title: "Do you use these fuels in your home?",
-        category: "home",
+        category: "household",
         type: "checkbox",
         basekg: 0,
         answers: [
@@ -111,7 +111,7 @@ db.questions.insertMany([
     {
         key: "recycling",
         title: "Do you recycle?",
-        category: "home",
+        category: "household",
         type: "checkbox",
         basekg: 3400,
         answers: [
@@ -122,7 +122,7 @@ db.questions.insertMany([
     {
         key: "carsInHousehold",
         title: "How many cars does your household use?",
-        category: "home",
+        category: "household",
         type: "radio",
         basekg: 0,
         answers: [
