@@ -32,5 +32,19 @@ describe("UpdateItem.vue", () => {
     const inputs = wrapper.findAll('input');
     expect(inputs).toHaveLength(4);
     expect(wrapper.vm.question.answers).toHaveLength(4);
+  });
+
+//   below can be confusing as it is testing the inputAnswer returned from checkboxes, 
+// Ally had oil already selected, the below unselects oil and then selects wood
+// it then tests that inputAnswer is an array which contains only "Wood"
+
+  it('should set inputAnswer on change', async () => {
+    const inputs = wrapper.findAll('input');
+    inputs.at(0).trigger("click");
+    await wrapper.vm.$nextTick();
+    inputs.at(1).trigger("click");
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.inputAnswer).toHaveLength(1);
+    expect(wrapper.vm.inputAnswer[0]).toMatch("Wood");
   })
 });
