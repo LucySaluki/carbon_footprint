@@ -1,7 +1,7 @@
 <template>
   <main>
     <HeaderPage />
-    <!-- <MapPage :globalEmissions="globalEmissions"/> -->
+    <MapPage :globalEmissions="globalEmissions"/>
     <!-- Render the login component if NO user is selected (selectedUser === null) -->
     <LoginPage v-if="!selectedUser" :users="users" :countries="countries" />
 

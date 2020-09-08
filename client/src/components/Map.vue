@@ -1,7 +1,7 @@
 <template>
     <div>
-    <h3>MapTitle</h3>
-    <GChart id="gauge-chart" :type="chartType" :settings="chartSettings" :data="mapData"/>
+    <h3>World Carbon Dioxide Production per Capita (tonnes)</h3>
+    <GChart id="gauge-chart" :type="chartType" :settings="chartSettings" :data="mapData" :options="chartOptions"/>
     </div>
 </template>
 
@@ -16,19 +16,22 @@ export default {
   },
   data () {
     return { 
-      chartType:"Geochart",
+      chartType:"GeoChart",
       chartSettings:{
-        packages:['geochart'],
+        packages:['geochart']
+      },
+      chartOptions:{
         mapsApiKey: GEO_API_KEY
       }
     }
   },
   props: ['globalEmissions'],
   computed: {mapData: function() {
-      const mapData=[['country','value']];
+      const mapData=[['Country','Value']];
       const countryData=["Sweden",6.4];
       mapData.push(countryData);
       console.log(mapData);
+      return mapData;
   }}
 }
 </script>
