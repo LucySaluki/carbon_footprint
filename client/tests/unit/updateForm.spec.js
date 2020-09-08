@@ -34,5 +34,17 @@ describe("UpdateForm.vue", () => {
     it("should have a number of categories.", () => {
         expect(wrapper.vm.categories).toHaveLength(2);
     });
-
+    it("should have tab buttons for each category.", () => {
+        const tabButtons = wrapper.findAll(".tab-button");
+        expect(tabButtons).toHaveLength(2);
+        expect(tabButtons.at(0).element.value).toMatch("household");
+    })
+    // can't get this to work, it doesn't seem to be waiting for
+    // the mounted() js method to toggle the hidden class
+    // -- expect .hidden length to be 1, is 3
+    // it("should have some hidden questions.", async () => {
+    //     await wrapper.vm.$nextTick();
+    //     const hidden = wrapper.findAll(".hidden");
+    //     expect(hidden).toHaveLength(1);
+    // });
 });
