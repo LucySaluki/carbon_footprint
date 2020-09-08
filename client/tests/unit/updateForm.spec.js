@@ -38,6 +38,12 @@ describe("UpdateForm.vue", () => {
         const tabButtons = wrapper.findAll(".tab-button");
         expect(tabButtons).toHaveLength(2);
         expect(tabButtons.at(0).element.value).toMatch("household");
+    });
+    it("should group questions into categories.", () => {
+        const households = wrapper.findAll(".household");
+        const travels = wrapper.findAll(".travel");
+        expect(households).toHaveLength(2);
+        expect(travels).toHaveLength(1);
     })
     // can't get this to work, it doesn't seem to be waiting for
     // the mounted() js method to toggle the hidden class
