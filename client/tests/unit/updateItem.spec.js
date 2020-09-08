@@ -16,11 +16,21 @@ describe("UpdateItem.vue", () => {
   });
 
   it('should have a question as a prop.', () => {
-    expect(wrapper.vm.question.key).toMatch("fuelUsage")
+    expect(wrapper.vm.question.key).toMatch("fuelUsage");
+  });
+
+  it('should have a selectedUser as a prop', () => {
+    expect(wrapper.vm.selectedUser.name).toMatch('Ally');
   });
 
   it('should render a question title.', () => {
     const questionTitle = wrapper.find('h2');
-    expect(questionTitle.element.textContent).toMatch("Do you use these fuels in your home?")
+    expect(questionTitle.element.textContent).toMatch("Do you use these fuels in your home?");
   });
+
+  it('should render the inputs correctly', () => {
+    const inputs = wrapper.findAll('input');
+    expect(inputs).toHaveLength(4);
+    expect(wrapper.vm.question.answers).toHaveLength(4);
+  })
 });
