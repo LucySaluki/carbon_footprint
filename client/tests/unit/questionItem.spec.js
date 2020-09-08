@@ -1,0 +1,21 @@
+import { shallowMount } from "@vue/test-utils";
+import QuestionItem from "@/components/QuestionItem.vue";
+import { questionsData } from "./questions.js";
+
+describe("QuestionItem.vue", () => {
+    let wrapper;
+    beforeEach(async () => {
+        wrapper = shallowMount(QuestionItem, {
+            propsData: {
+                question: questionsData[0]
+            }
+        });
+        await wrapper.vm.$nextTick();
+    });
+
+    it("should have a question as a prop.", () => {
+        expect(wrapper.vm.question.key).toMatch("sizeOfHouse");
+        expect(wrapper.vm.question.type).toMatch("radio");
+        expect(wrapper.vm.question.answers).toHaveLength(3);
+    })
+});
