@@ -17,5 +17,9 @@ describe("QuestionItem.vue", () => {
         expect(wrapper.vm.question.key).toMatch("sizeOfHouse");
         expect(wrapper.vm.question.type).toMatch("radio");
         expect(wrapper.vm.question.answers).toHaveLength(3);
-    })
+    });
+    it("should render the question title in an h2 tag.", () => {
+        const header = wrapper.find("h2");
+        expect(header.element.textContent).toMatch(wrapper.vm.question.title);
+    });
 });
