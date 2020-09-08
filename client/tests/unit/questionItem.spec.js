@@ -20,6 +20,10 @@ describe("QuestionItem.vue", () => {
     });
     it("should render the question title in an h2 tag.", () => {
         const header = wrapper.find("h2");
-        expect(header.element.textContent).toMatch(wrapper.vm.question.title);
+        expect(header.element.textContent).toMatch("What size is your house?");
+    });
+    it("should have the correct number of inputs.", () => {
+        const inputs = wrapper.findAll("input");
+        expect(inputs).toHaveLength(3);
     });
 });
