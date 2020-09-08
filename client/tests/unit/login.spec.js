@@ -43,5 +43,25 @@ describe('Login.vue', () => {
         const countrySelect = selects.at(1);
         const options = countrySelect.findAll('option')
         expect(options).toHaveLength(4);
+    });
+
+    it('should set country on option change in country dropdown.', async () => {
+        wrapper.setData({ selected: "new_user" });
+        await wrapper.vm.$nextTick();
+        const selects = wrapper.findAll('select');
+        const countrySelect = selects.at(1);
+        const options = countrySelect.findAll('option');
+        options.at(1).setSelected();
+        expect(wrapper.vm.country).toMatch('Albania');
+    });
+
+    it('should set name on change/text input', async () => {
+        wrapper.setData({ selected: "new_user" });
+        await wrapper.vm.$nextTick();
+        wrapper.setData({name: "Jonny"})
+        await wrapper.vm.$nextTick();
+        const textBox = wrapper.find('#name');
+        // textBox.setData({value: "Jonny"});
+        expect(textBox.element.value).toMatch("Jonny");
     })
 })
