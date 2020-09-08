@@ -31,6 +31,7 @@ export const eiaDataApi = function (restCountries) {
                         return {
                             country: foundCountry.name,
                             countryCode: emissions3Code,
+                            countryShortCode: foundCountry.alpha2Code,
                             border: foundCountry.borders,
                             emissions: kg,
                             population: foundCountry.population,
