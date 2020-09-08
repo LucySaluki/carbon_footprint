@@ -37,7 +37,7 @@ describe('Login.vue', () => {
     });
 
     it('should populate a select with countries if new_user is selected and selected is truthy', async () => {
-        wrapper.setData({selected: "new_user"});
+        wrapper.setData({ selected: "new_user" });
         await wrapper.vm.$nextTick();
         const selects = wrapper.findAll('select');
         const countrySelect = selects.at(1);
@@ -58,19 +58,29 @@ describe('Login.vue', () => {
     it('should set name on change/text input', async () => {
         wrapper.setData({ selected: "new_user" });
         await wrapper.vm.$nextTick();
-        wrapper.setData({name: "Jonny"})
+        wrapper.setData({ name: "Jonny" })
         await wrapper.vm.$nextTick();
         const textBox = wrapper.find('#name');
         expect(textBox.element.value).toMatch("Jonny");
     });
 
     it('should render user name and country if selected is equal to a user.', async () => {
-      wrapper.setData({selected: wrapper.vm.users[1]});
-      await wrapper.vm.$nextTick();
-      const userDetails = wrapper.findAll('p');
-      const userName = userDetails.at(0).element;
-      const userCountry = userDetails.at(1).element;
-      expect(userName.textContent).toMatch('Name: Ally');
-      expect(userCountry.textContent).toMatch('Country: Albania')
-    })
+        wrapper.setData({ selected: wrapper.vm.users[1] });
+        await wrapper.vm.$nextTick();
+        const userDetails = wrapper.findAll('p');
+        const userName = userDetails.at(0).element;
+        const userCountry = userDetails.at(1).element;
+        expect(userName.textContent).toMatch('Name: Ally');
+        expect(userCountry.textContent).toMatch('Country: Albania')
+    });
+
+    it('should render Load My Details and Delete User buttons if selected is equal to a user.', async () => {
+        wrapper.setData({ selected: wrapper.vm.users[1] });
+        await wrapper.vm.$nextTick();
+        const buttons = wrapper.findAll('input');
+        const detailButton = buttons.at(0);
+        const deleteButton = buttons.at(1);
+        expect(detailButton.element.value).toMatch('Load my details');
+        expect(deleteButton.element.value).toMatch('Delete User');
+    });
 })
