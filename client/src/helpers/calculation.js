@@ -5,10 +5,9 @@ export const calculation = function (payload, user, questions) {
     let score = questions.reduce((total, question) => {
         return total + question.basekg
     }, 0);
-
     let homeScore = 0;
     // home category
-    let homeQuestions = questions.filter(question => question.category === "home");
+    let homeQuestions = questions.filter(question => question.category === "household");
     // loop through each question
     homeQuestions.forEach(question => {
         // loop through each possible answer
@@ -35,7 +34,7 @@ export const calculation = function (payload, user, questions) {
     };
 
     // all other categories
-    let otherCategories = questions.filter(question => question.category !== "home");
+    let otherCategories = questions.filter(question => question.category !== "household");
     // loop through each question
     otherCategories.forEach(question => {
         if (question.answers.length === 1) { // it's an 'input * per-unit' question
