@@ -83,4 +83,12 @@ describe('Login.vue', () => {
         expect(detailButton.element.value).toMatch('Load my details');
         expect(deleteButton.element.value).toMatch('Delete User');
     });
+
+    it('should render Create New User button if selected is equal to new_user.', async () => {
+        wrapper.setData({ selected: "new_user" });
+        await wrapper.vm.$nextTick();
+        const inputs = wrapper.findAll('input');
+        const newUserButton = inputs.at(1);
+        expect(newUserButton.element.value).toMatch('Create New User')
+    })
 })
