@@ -10,7 +10,6 @@ export const calculation = function (payload, user, questions) {
     let homeQuestions = questions.filter(question => question.category === "household");
     // loop through each question
     homeQuestions.forEach(question => {
-        console.log("asdsa")
         // loop through each possible answer
         question.answers.forEach(answer => {
             // if user answers is an array...
