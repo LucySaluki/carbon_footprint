@@ -18,4 +18,7 @@ it('should have a country prop.', () => {
   expect(wrapper.vm.countries[0].name).toMatch('Albania')
 });
 
+it('should have a user prop.', () => {
+  expect(wrapper.vm.users[0].name).toMatch('Vishal')
+})
 })
