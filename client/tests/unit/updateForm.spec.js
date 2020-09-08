@@ -23,5 +23,12 @@ describe("UpdateForm.vue", () => {
         expect(wrapper.vm.selectedUser.name).toMatch("Ally");
         expect(wrapper.vm.selectedUser.country).toMatch("Albania");
         expect(wrapper.vm.selectedUser.score).toEqual(13.871);
-    })
+    });
+    it("should have an empty answers data object.", () => {
+        expect(wrapper.vm.answers).toEqual({});
+    });
+    it("should have the right number of UpdateItems.", () => {
+        const updateItems = wrapper.find("article");
+        expect(updateItems.element.children).toHaveLength(3);
+    });
 });
