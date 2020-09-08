@@ -28,5 +28,11 @@ describe("Questions.vue", () => {
     it("should have the right number of QuestionItems.", () => {
         const questionItems = wrapper.find("form");
         expect(questionItems.element.children).toHaveLength(4);
-    })
-})
+    });
+    it("should fill the answers object on save.", async () => {
+        const form = wrapper.find("form");
+        form.trigger("submit.prevent");
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.answers).toEqual({ sizeOfHouse: [], fuelUsage: [], travelByBus: [] });
+    });
+});
