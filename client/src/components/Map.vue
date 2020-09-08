@@ -24,6 +24,7 @@ export default {
         return {
             chartOptions: {
                 mapsApiKey: GEO_API_KEY,
+                colorAxis: {minValue: 0,  colors: ['#B9FFB7', '#000000']}
             },
             settings: { packages: ["geochart"], mapsApiKey: GEO_API_KEY },
         };
@@ -35,7 +36,7 @@ export default {
                 (el) => el.country === "Gibraltar"
             );
             if (gibraltar >= 0) {
-                this.globalEmissions.splice(filtered, 1);
+                this.globalEmissions.splice(gibraltar, 1);
             }
             const data = [["Country", "Emissions"]];
             this.globalEmissions.forEach((country) => {
