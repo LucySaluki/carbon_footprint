@@ -1,58 +1,54 @@
-export const calculation = function(payload, user, questions){
+export const calculation = function (payload, user, questions) {
     user.answers = payload;
 
+    // get the baseKG from every question
     let score = questions.reduce((total, question) => {
         return total + question.basekg
     }, 0);
 
-    let houseScore = 0;
-
-    questions[1].answers.forEach((answer) => {
-        if (answer.value === payload.sizeOfHouse) {
-            houseScore += answer.kg
-        }
-    })
-
-    questions[2].answers.forEach((answer) => {
-        payload.fuelUsage.forEach((fuel) => {
-            if (answer.value === fuel) {
-                houseScore += answer.kg
+    let homeScore = 0;
+    // home category
+    let homeQuestions = questions.filter(question => question.category === "home");
+    // loop through each question
+    homeQuestions.forEach(question => {
+        // loop through each possible answer
+        question.answers.forEach(answer => {
+            // if user answers is an array...
+            if (Array.isArray(payload[question.key])) {
+                // loop through and match each to the possible answers
+                payload[question.key].forEach(choice => {
+                    if (answer.value === choice) {
+                        homeScore += answer.kg;
+                    }
+                });
+            } else {
+                // else just loop through and match to possible answers
+                if (answer.value === payload[question.key]) {
+                    homeScore += answer.kg;
+                }
             }
-        })
-    })
+        });
+    });
+    // divide total score for home category questions by the number of people in house
+    if (payload.numPeopleInHouse > 0) {
+        score += homeScore / payload.numPeopleInHouse;
+    };
 
-    questions[3].answers.forEach((answer) => {
-        payload.recycling.forEach((choice) => {
-            if (answer.value === choice) {
-                houseScore += answer.kg
-            }
-        })
-    })
-
-    questions[4].answers.forEach((answer) => {
-        if (answer.value === payload.carsInHousehold) {
-            houseScore += answer.kg
+    // all other categories
+    let otherCategories = questions.filter(question => question.category !== "home");
+    // loop through each question
+    otherCategories.forEach(question => {
+        if (question.answers.length === 1) { // it's an 'input * per-unit' question
+            score += (question.answers[0].kg * payload[question.key]);
+        } else { // it's a normal question
+            question.answers.forEach(answer => {
+                if (answer.value === payload[question.key]) {
+                    score += answer.kg;
+                }
+            });
         }
-    })
-    score += houseScore / payload.numPeopleInHouse;
+    });
 
-    score += questions[5].answers[0].kg * payload.travelByBus;
-
-    score += questions[6].answers[0].kg * payload.travelByTrain;
-
-    score += questions[7].answers[0].kg * payload.travelByPlane;
-
-    questions[8].answers.forEach((answer) => {
-        if (answer.value === payload.weeklyDiet) {
-            score += answer.kg
-        }
-    })
-
-    questions[9].answers.forEach((answer) => {
-        if (answer.value === payload.foodMiles) {
-            score += answer.kg
-        }
-    })
-
-    return Math.round(score) / 1000
+    //return in tonnes
+    return Math.round(score) / 1000;
 }
