@@ -55,7 +55,7 @@ db.users.insertMany([
         name: "Jarrod",
         score: 7.791,
         newScore: 0,
-        country: "United Kingdom",
+        country: "Canada",
         answers: {
             carsInHousehold: 0,
             foodMiles: "Mostly own garden/locally",
