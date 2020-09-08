@@ -17,6 +17,7 @@
       </div>
     </div>
     <EveryoneLikeMe v-if="globalEmissions" :selectedUser="selectedUser" :globalEmissions="globalEmissions" />
+    <section v-else>Loading...</section>
     <UpdateForm :selectedUser="selectedUser" :questions="questions" />
   </div>
 </template>

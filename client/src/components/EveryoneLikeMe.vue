@@ -1,6 +1,6 @@
 <template>
     <section>
-        <p>There would be {{ percentDifference }}% of the current worldwide CO<sub>2</sub> if everyone lived like you</p>
+        <p>There would be <strong>{{ percentDifference }}%</strong> of the current worldwide CO<sub>2</sub> if everyone lived like you</p>
     </section>
 </template>
 
