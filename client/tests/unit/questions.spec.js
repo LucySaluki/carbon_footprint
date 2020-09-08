@@ -35,4 +35,11 @@ describe("Questions.vue", () => {
         await wrapper.vm.$nextTick();
         expect(wrapper.vm.answers).toEqual({ sizeOfHouse: [], fuelUsage: [], travelByBus: [] });
     });
+    it("should only fill in undefined answers.", async () => {
+        wrapper.vm.answers.sizeOfHouse = "Small";
+        wrapper.vm.answers.fuelUsage = ["Oil", "Coal"];
+        wrapper.find("form").trigger("submit.prevent");
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.answers).toEqual({ sizeOfHouse: "Small", fuelUsage: ["Oil", "Coal"], travelByBus: [] });
+    });
 });
