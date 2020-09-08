@@ -44,13 +44,22 @@ describe("UpdateForm.vue", () => {
         const travels = wrapper.findAll(".travel");
         expect(households).toHaveLength(2);
         expect(travels).toHaveLength(1);
-    })
+    });
     // can't get this to work, it doesn't seem to be waiting for
     // the mounted() js method to toggle the hidden class
     // -- expect .hidden length to be 1, is 3
+
+    // same goes for tab buttons .active
+    //
     // it("should have some hidden questions.", async () => {
     //     await wrapper.vm.$nextTick();
     //     const hidden = wrapper.findAll(".hidden");
     //     expect(hidden).toHaveLength(1);
     // });
+    it("should hide and show questions.", () => {
+        const article = wrapper.find("article");
+        expect(article.element.children[0].className).toMatch("household");
+        expect(article.element.children[1].className).toMatch("household");
+        expect(article.element.children[2].className).toMatch("travel hidden");
+    });
 });
