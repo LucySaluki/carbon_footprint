@@ -2,7 +2,8 @@
 <main>
 <form v-on:submit.prevent="saveAnswers">
     <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
-    <input type="submit" value="Save Answers" />
+    <input v-if="okToSubmit" type="submit" value="Save Answers" />
+    <input v-else type="submit" value="Please answer all the questions!" disabled />
 </form>
 
 </main>
@@ -18,7 +19,8 @@ export default {
     props: ["questions", "selectedUser"],
     data() {
         return {
-            answers: {}
+            answers: {},
+            okToSubmit: false
         }
     },
     methods: {
@@ -29,13 +31,24 @@ export default {
                 }
             });
             eventBus.$emit("save-answers", this.answers);
+        },
+        questionsFilled: function () {
+            const filtered = this.questions.filter(question => question.type !== "checkbox");
+            const keys = filtered.map(question => question.key);
+            for (let key of keys) {
+                if (this.answers[key] === undefined) {
+                    return false;
+                }
+            }
+            return true;
         }
     },
     mounted() {
         eventBus.$on("question-item-input", (payload) => {
             this.answers[payload.question] = payload.answer;
+            this.okToSubmit = this.questionsFilled();
         })
-    }
+    },
 
 }
 </script>

@@ -33,6 +33,9 @@ export default {
     },
     methods: {
         handleInput: function () {
+            if (this.inputAnswer === "" && this.question.type === "number") {
+                this.inputAnswer = 0;
+            }
             eventBus.$emit("question-item-input", {
                 question: this.question.key,
                 answer: (this.question.type === "number") ? Number(this.inputAnswer) : this.inputAnswer,
