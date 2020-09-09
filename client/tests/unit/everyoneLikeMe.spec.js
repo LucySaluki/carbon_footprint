@@ -29,5 +29,17 @@ describe("EveryoneLikeMe.vue", () => {
     });
     it("should have a total global population.", () => {
         expect(wrapper.vm.totalWorldPop).toEqual(69154026)
-    })
+    });
+    it("should have a total global emissions.", () => {
+        expect(Math.round(wrapper.vm.totalWorldEmissions)).toEqual(Math.round(166250331.441))
+    });
+    it("should have a user score.", () => {
+        expect(wrapper.vm.userScore).toEqual(13.871);
+    });
+    it("should have a hypothetical world score.", () => {
+        expect(wrapper.vm.hypotheticalWorld).toEqual(959235494.646);
+    });
+    it("should calculate the percentage change.", () => {
+        expect(wrapper.vm.percentDifference).toEqual(577)
+    });
 });
