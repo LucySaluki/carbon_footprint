@@ -106,5 +106,9 @@ export default {
 .footnote {
   font-size: 75%;
   font-style: italic;
+  text-align: center;
 } 
+h3 {
+  text-align:center;
+}
 </style>

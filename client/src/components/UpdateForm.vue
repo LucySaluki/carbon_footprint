@@ -1,5 +1,6 @@
 <template>
     <main id="main">
+        <h3>Update your answers to see how your carbon footprint could change!</h3>
         <div>
             <span>Categories: </span>
             <input

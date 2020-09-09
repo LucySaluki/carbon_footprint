@@ -1,6 +1,6 @@
 <template>
 <main id="main">
-    <h2>Hello {{selectedUser.name}}, please answer the following questions:</h2>
+    <h3>Hello {{selectedUser.name}}, please answer the following questions:</h3>
 <form v-on:submit.prevent="saveAnswers">
     <article>
         <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
