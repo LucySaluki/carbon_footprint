@@ -1,7 +1,10 @@
 <template>
-<main>
+<main id="main">
+    <h2>Please answer the following questions:</h2>
 <form v-on:submit.prevent="saveAnswers">
-    <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
+    <article>
+        <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
+    </article>
     <input v-if="okToSubmit" type="submit" value="Save Answers" />
     <input v-else type="submit" value="Please answer all the questions!" disabled />
 </form>
@@ -53,8 +56,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 input {
     margin: 0px 6px;
+}
+#main {
+    margin: 40px;
+    padding: 10px;
+}
+article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: aliceblue;
 }
 </style>
