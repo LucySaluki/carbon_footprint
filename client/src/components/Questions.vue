@@ -1,6 +1,6 @@
 <template>
 <main id="main">
-    <h2>Please answer the following questions:</h2>
+    <h2>Hello {{selectedUser.name}}, please answer the following questions:</h2>
 <form v-on:submit.prevent="saveAnswers">
     <article>
         <QuestionItem v-for="(question, index) in questions" :key="index" :question="question"  />
@@ -57,9 +57,6 @@ export default {
 </script>
 
 <style scoped>
-input {
-    margin: 0px 6px;
-}
 #main {
     margin: 40px;
     padding: 10px;

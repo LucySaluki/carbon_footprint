@@ -65,4 +65,7 @@ main > div {
     display: flex;
     flex-flow: column nowrap;
 }
+input {
+    margin: 0px 6px;
+}
 </style>
