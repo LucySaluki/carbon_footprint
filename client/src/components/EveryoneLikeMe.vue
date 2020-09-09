@@ -1,6 +1,6 @@
 <template>
     <section>
-        <p>There would be <strong>{{ percentDifference }}%</strong> of the current worldwide CO<sub>2</sub> if everyone lived like you</p>
+        <p :class="percentDifference > 100 ? 'bad' : 'good'">There would be <strong>{{ percentDifference }}%</strong> of the current worldwide CO<sub>2</sub> if everyone lived like you</p>
     </section>
 </template>
 
@@ -45,5 +45,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+p {
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+.bad {
+    background-color: rgb(230, 168, 168);
+}
+.good {
+    background-color: rgb(175, 202, 175);
+}
 </style>

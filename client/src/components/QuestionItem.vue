@@ -1,9 +1,9 @@
 <template>
-    <section>
+    <main>
         <header>
             <h2>{{ question.title }}</h2>
         </header>
-        <main>
+        <div>
             <div v-for="(answer, index) in question.answers" :key="index">
                 <input
                     v-on:change="handleInput"
@@ -17,8 +17,8 @@
                 />
                 <label :for="answer.value">{{ answer.value }}</label>
             </div>
-        </main>
-    </section>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -45,8 +45,27 @@ export default {
 };
 </script>
 
-<style>
-section {
-    background-color: #E0F8CD;
+<style scoped>
+main {
+    margin: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+header {
+    border-bottom: 2px solid rgb(128, 141, 128);
+    padding: 10px 10px;
+    margin: 10px 5px;
+}
+header > h2 {
+    margin: 0px;
+}
+main > div {
+    background-color: rgba(102, 167, 102, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+input {
+    margin: 0px 6px;
 }
 </style>
