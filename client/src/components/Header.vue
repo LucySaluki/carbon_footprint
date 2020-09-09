@@ -4,7 +4,7 @@
       <img src="@/assets/logo.jpg" alt="carbon_footprint">
       <h1 >Welcome to the Carbon Footprint Calculator</h1>
     </div>
-      <p>We can calculate your carbon footprint and see how you compare with your country average and other countries around the world.  We hope you will use this tool to then see how you can reduce your carbon footprint and hopefully help save the planet!</p>
+      <p>We can calculate your annual carbon footprint and see how you compare with the average annual carbon foot print for your country and other countries around the world.  We hope you will use this tool to then see how you can reduce your carbon footprint and hopefully help save the planet!</p>
       <input type="button" value="Home" v-on:click="goHome" />
   </div>
 </template>
