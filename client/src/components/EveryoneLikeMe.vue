@@ -53,6 +53,7 @@ p {
 }
 .bad {
     background-color: rgb(230, 168, 168);
+    color: rgb(122, 16, 16);
 }
 .good {
     background-color: rgb(175, 202, 175);
