@@ -39,6 +39,7 @@ h1{
   text-decoration: underline;
   text-align: center;
   padding: 40px;
+  font-family: 'Slabo 27px', serif;
 }
 input {
   margin: 10px;
