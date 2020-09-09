@@ -6,9 +6,9 @@ module.exports = {
             new GoogleFontsPlugin({
                 // specify whichever fonts and styles you want below and then use in CSS as normal
                 fonts: [
-                    { family: 'Cinzel Decorative', variants: ['700bold'] },
-                    { family: 'Marck Script' },
-                    { family: 'Tangerine', variants: ['700bold'] }
+                    { family: 'Lato', variants: ['400regular'] },
+                    { family: 'Roboto', variants: ['500medium'] },
+                    { family: 'Tangerine', variants: ['400regular'] }
                 ]
             })
         ]
