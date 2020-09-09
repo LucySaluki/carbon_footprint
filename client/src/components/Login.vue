@@ -24,7 +24,7 @@
         </select>
       </div>
     </div>
-    <div v-else-if="selected">
+    <div v-else-if="selected" class="name-country">
       <p>Name: {{ selected.name }}</p>
       <p>Country: {{ selected.country}}</p>
     </div>
@@ -87,7 +87,9 @@ export default {
 #login-form {
   display: flex;
   flex-flow: column;
+  align-items: center;
   padding: 20px;
+
 }
 #login-form > form {
   display: grid;
@@ -126,5 +128,7 @@ p {
 input[type=submit], input[type=button] {
   cursor: pointer;
 }
-
+.name-country > p {
+  padding:10px;
+}
 </style>

@@ -43,7 +43,7 @@ h1{
 }
 input {
   margin: 10px;
-  justify-self: start;
+  justify-self: center;
   height: 30px;
   border: none;
   background-color: transparent;
